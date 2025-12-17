@@ -16,10 +16,5 @@ module "ec2" {
   source        = "../../modules/ec2"
   ami           = data.aws_ami.amazon_linux.id
   instance_type = "t3.micro"
-  tags = {
-  Name        = "prod-ec2"
-  Environment = "prod"
-  Owner       = "jenkins-apply-test"
-  }
 }
 
