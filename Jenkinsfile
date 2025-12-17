@@ -10,19 +10,25 @@ pipeline {
     }
 
     stage('Terraform Plan') {
-      when { changeRequest() }
+      when {
+        changeRequest()
+      }
       steps {
         sh 'cd envs/prod && terraform plan'
       }
     }
 
     stage('Terraform Apply') {
-      when { branch "main" }
+      when {
+        allOf {
+          branch 'main'
+          not { changeRequest() }
+        }
+      }
       steps {
-        input "Approve Terraform Apply?"
+        input message: 'Approve Terraform Apply?'
         sh 'cd envs/prod && terraform apply -auto-approve'
       }
     }
   }
 }
-
