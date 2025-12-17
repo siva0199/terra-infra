@@ -5,7 +5,7 @@ resource "aws_instance" "this" {
   ami           = var.ami
   instance_type = var.instance_type
   tags = {
-  Name        = "prod-ec2"
+  Name        = "production-ec2"
   Environment = "prod"
   Owner       = "jenkins-apply-test"
   }
